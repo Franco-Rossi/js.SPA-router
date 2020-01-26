@@ -11,7 +11,9 @@ class Router {
       if (routePathSegs.length !== urlSegs.length) {
         return false;
       }
+      return routePathSegs.every((routePathSeg, i) => routePathSegs === urlSegs[i]);
     });
+    return matchedRoute;
   }
 
   _loadInitialRoutes() {
