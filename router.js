@@ -4,6 +4,16 @@ class Router {
     this._loadInitialRoutes();
   }
 
+  loadRoute(...urlSegs) {
+    const matchedRoute = this._matchUrlToRoute(urlSegs);
+
+    const url = `/${urlSegs.join('/')}`;
+    history.pushState({}, 'SPA Router', url);
+
+    const routerOutElement = document.querySelectorAll('[data-router]')[0];
+    routerOutElement.innerHTML = matchedRoute.template;
+  }
+
   _matchUrlToRoute(urlSegs) {
     const matchedRoute = this.routes.find(route => {
       const routePathSegs = route.path.split('/').splice(1);
