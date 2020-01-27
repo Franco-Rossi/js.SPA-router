@@ -16,7 +16,7 @@ class Router {
 
   _matchUrlToRoute(urlSegs) {
     const matchedRoute = this.routes.find(route => {
-      const routePathSegs = route.path.split('/').splice(1);
+      const routePathSegs = route.path.split('/').slice(1);
 
       if (routePathSegs.length !== urlSegs.length) {
         return false;
@@ -28,7 +28,8 @@ class Router {
 
   _loadInitialRoutes() {
     const pathNameSplit = window.location.pathname.split('/');
-    const pathSegs = pathNameSplit.length > 1 ? pathNameSplit[1] : '';
+    const pathSegs = pathNameSplit.length > 1 ? pathNameSplit.slice(1) : '';
+
     this.loadRoute(...pathSegs);
   }
 }
